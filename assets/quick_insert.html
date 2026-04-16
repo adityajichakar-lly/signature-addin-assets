@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Quick Insert Function</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        // Helper function - needed by template functions
+        function is_valid_data(str) {
+            return str !== null && str !== undefined && str !== "";
+        }
+
+        /**
+         * Quick insert function - auto-fetches from Graph if needed, then inserts signature
+         * NOTE: This function is only called when user clicks the button (email context exists)
+         */
+        async function quickInsertSignature(event) {
+            console.log('=== QUICK INSERT TRIGGERED ===');
+            
+            try {
+                if (!Office.context?.mailbox?.item) {
+                    console.error('❌ No email context available');
+                    event.completed();
+                    return;
+                }
+                
+                const userEmail = Office.context.mailbox.userProfile.emailAddress;
+                const API_BASE_URL = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:3001' 
+                    : '';
+                
+                // Fetch pre-generated signature from database
+                const response = await fetch(`${API_BASE_URL}/signature?email=${encodeURIComponent(userEmail)}`);
+                if (!response.ok) throw new Error('Failed to fetch signature');
+                
+                const data = await response.json();
+                
+                // Insert signature
+                Office.context.mailbox.item.body.setSignatureAsync(
+                    data.signatureHTML,
+                    { coercionType: "html" },
+                    function(asyncResult) {
+                        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+                            console.log('✅ Signature inserted!');
+                        } else {
+                            console.error('❌ Failed:', asyncResult.error);
+                        }
+                        event.completed();
+                    }
+                );
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                event.completed();
+            }
+        }
+        // Register function after Office is ready (required for OWA compatibility)
+        Office.onReady(function() {
+            Office.actions.associate("quickInsertSignature", quickInsertSignature);
+            console.log('✓ quickInsertSignature function registered');
+        });
+    </script>
+</head>
+<body>
+    <!-- Empty body - this is just for the function -->
+</body>
+</html>

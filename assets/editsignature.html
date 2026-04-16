@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilly Signature Manager</title>
+    <link rel="stylesheet" href="../CSS/assignsignature.css">
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <img src="../../../assets/final_logo.png" alt="Lilly Logo" class="app-logo">
+            <h1 class="app-title">Signature Manager</h1>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <!-- SECTION 1: Your Information -->
+        <section class="info-section">
+            <div class="section-title">
+                <svg class="section-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                Your Information
+            </div>
+            <p class="section-description">Information from your Lilly profile</p>
+
+            <!-- Info Grid -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Name</div>
+                    <div class="info-value" id="display_name_readonly">Loading...</div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">Email</div>
+                    <div class="info-value" id="email_readonly">Loading...</div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">Job Title</div>
+                    <div class="info-value" id="job_title_readonly" style="display:none;"></div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <input type="text" id="job_title_input"
+                            placeholder="Enter your title"
+                            style="flex:1; padding:6px 8px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; font-family:inherit;"
+                        />
+                        <button id="saveTitleBtn" onclick="saveTitle()"
+                            style="padding:6px 12px; background:#E4002B; color:#fff; border:none; border-radius:6px; font-size:13px; cursor:pointer; white-space:nowrap;">
+                            Save
+                        </button>
+                    </div>
+                    <div id="titleSaveMsg" style="display:none; font-size:12px; margin-top:4px;"></div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">Department</div>
+                    <div class="info-value" id="department_readonly">Loading...</div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">
+                        Office Phone
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank" class="info-link-icon" title="Update in Workday">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="info-value" id="office_phone_readonly">Loading...</div>
+                    <div class="info-action" id="officePhoneAction" style="display: none;">
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank">Update in Workday →</a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">
+                        Mobile Phone
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank" class="info-link-icon" title="Update in Workday">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="info-value" id="mobile_readonly">Loading...</div>
+                    <div class="info-action" id="mobilePhoneAction" style="display: none;">
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank">Update in Workday →</a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-label">
+                        Country
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank" class="info-link-icon" title="Update in Workday">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="info-value" id="location_readonly">Loading...</div>
+                    <div class="info-action" id="locationAction" style="display: none;">
+                        <a href="https://lilly.service-now.com/ec?id=kb_article&sysparm_article=KB2044319&table=kb_knowledge&searchTerm=change%20information%20in%20workday" target="_blank">Update in Workday →</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Workday Sync Info -->
+            <div class="info-note">
+                <svg class="info-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <span>Changes in Workday may take up to 24 hours to sync. To update your job title, please contact HR.</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Your Signature -->
+        <section class="template-previews">
+            <div class="section-title">
+                <svg class="section-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                </svg>
+                Your Signature
+            </div>
+            <p class="section-description">Your signature is automatically generated from your profile. Click below to copy it.</p>
+            
+            <div class="action-buttons" style="margin-top: 20px;">
+                <button class="btn btn-primary" id="copyButton" onclick="copySignatureFromDatabase()">
+                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
+                    </svg>
+                    <span class="btn-text">Copy Signature to Clipboard</span>
+                </button>
+                
+                <button class="btn btn-secondary" id="clearCacheButton" onclick="clearCache()" style="margin-left: 10px; display: none;">
+                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="btn-text">Clear Cache & Reload</span>
+                </button>
+            </div>
+            
+            <div id="copySuccessMessage" class="glass-tip" style="display: none; margin-top: 20px; background: #d1fae5; color: #065f46;">
+                <svg class="tip-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>✅ Signature copied! Paste it with Ctrl+V (Windows) or Cmd+V (Mac)</span>
+            </div>
+        </section>
+
+        <!-- Footer Links -->
+        <div class="footer-links" style="display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e0e0e0;">
+            <span style="font-size: 14px; color: #666; margin-right: 8px;">How's your experience?</span>
+            <a href="https://forms.office.com/r/inXiycfTv1" target="_blank" title="Good experience" style="text-decoration: none; font-size: 32px; line-height: 1; transition: transform 0.2s; display: inline-block;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">😊</a>
+            <a href="https://forms.office.com/r/inXiycfTv1" target="_blank" title="Bad experience" style="text-decoration: none; font-size: 32px; line-height: 1; transition: transform 0.2s; display: inline-block;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">☹️</a>
+        </div>
+    </main>
+
+    <script src="../Js/editsignature.js"></script>
+</body>
+</html>
