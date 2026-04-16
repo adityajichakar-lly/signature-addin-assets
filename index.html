@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilly Signature Add-in - OWA Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section h2::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #667eea;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+        .step strong {
+            color: #333;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+        .note {
+            background: #fffbea;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .note strong {
+            color: #ff9800;
+        }
+        .warning {
+            background: #ffe0e0;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .warning strong {
+            color: #dc3545;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .manifest-url {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        .success {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="assets/final_logo_86x86.png" alt="Lilly Logo" class="logo">
+            <h1>🧪 Lilly Signature Add-in</h1>
+            <p>Test the add-in in Outlook Web Access (OWA)</p>
+        </div>
+
+        <div class="section">
+            <h2>What is this?</h2>
+            <p>This is a testing page for the Lilly Signature Add-in. This add-in automatically inserts your Lilly email signature when composing new emails in Outlook Web Access (OWA).</p>
+            <div class="info-box">
+                <strong>Note:</strong> This add-in is currently in testing phase. Only authorized Lilly employees can test it.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Features</h2>
+            <ul style="list-style-position: inside; line-height: 1.8; color: #666;">
+                <li>✅ Auto-insert your professional signature on new emails</li>
+                <li>✅ Edit signature preferences in the task pane</li>
+                <li>✅ Quick Insert button for fast signature insertion</li>
+                <li>✅ Supports both Desktop and Mobile Outlook</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>How to Test in OWA</h2>
+
+            <div class="step">
+                <strong>Step 1: Open Outlook Web Access</strong>
+                <p>Go to <a href="https://outlook.office365.com" target="_blank">https://outlook.office365.com</a> and sign in with your Lilly credentials.</p>
+            </div>
+
+            <div class="step">
+                <strong>Step 2: Click the Settings Gear Icon</strong>
+                <p>In the top right corner, click the <strong>Settings icon (⚙️)</strong> and select <strong>"View all Outlook settings"</strong>.</p>
+            </div>
+
+            <div class="step">
+                <strong>Step 3: Navigate to Add-ins</strong>
+                <p>Go to <strong>Settings → Integrated apps → Add-ins</strong>.</p>
+            </div>
+
+            <div class="step">
+                <strong>Step 4: Get Add-ins</strong>
+                <p>Click <strong>"Get Add-ins"</strong> button.</p>
+            </div>
+
+            <div class="step">
+                <strong>Step 5: Upload the Manifest</strong>
+                <p>Look for an option to <strong>"Upload an add-in"</strong> or <strong>"Upload my manifest"</strong>.</p>
+                <p>Paste the manifest URL:</p>
+                <div class="manifest-url" id="manifestUrl">
+                    https://raw.githubusercontent.com/adityajichakar-lly/signature-addin-assets/main/signature_manifest_github_test.xml
+                </div>
+                <button class="copy-btn" onclick="copyManifestUrl()">📋 Copy URL</button>
+            </div>
+
+            <div class="step">
+                <strong>Step 6: Add the Add-in</strong>
+                <p>Click <strong>"Add"</strong> to add the add-in to your OWA.</p>
+            </div>
+
+            <div class="step">
+                <strong>Step 7: Test It Out</strong>
+                <p>Create a new email. You should see:</p>
+                <ul style="list-style-position: inside; margin-top: 10px; line-height: 1.6;">
+                    <li>A <strong>"Lilly Signature Manager"</strong> group in the ribbon</li>
+                    <li><strong>"Quick Insert"</strong> button - inserts your signature instantly</li>
+                    <li><strong>"Edit Signature"</strong> button - opens the signature editor pane</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Troubleshooting</h2>
+
+            <div class="warning">
+                <strong>Issue: "Cannot install the add-in" error</strong>
+                <p style="margin-top: 5px;">This usually means the manifest URL is incorrect or unreachable. Verify the URL in your browser first.</p>
+            </div>
+
+            <div class="warning">
+                <strong>Issue: Buttons don't appear in the ribbon</strong>
+                <p style="margin-top: 5px;">Try refreshing OWA (Ctrl+F5 or Cmd+Shift+R). Sometimes the cache needs to be cleared.</p>
+            </div>
+
+            <div class="warning">
+                <strong>Issue: Signature doesn't auto-insert</strong>
+                <p style="margin-top: 5px;">Make sure you're composing a <strong>new message</strong> (not replying). The auto-insert only works for new emails.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Manifest File Details</h2>
+
+            <div class="info-box">
+                <strong>Manifest ID:</strong> {C341AD31-BF7A-4C1D-99F1-D2E5896BEB0A}
+                <br><strong>Version:</strong> 1.0
+                <br><strong>Provider:</strong> Eli Lilly and Company
+            </div>
+
+            <p>The manifest file contains all the configuration for the add-in including:</p>
+            <ul style="list-style-position: inside; line-height: 1.8; color: #666; margin-top: 10px;">
+                <li>Add-in name and description</li>
+                <li>Icon URLs</li>
+                <li>Ribbon button definitions</li>
+                <li>Runtime script locations</li>
+                <li>Permissions and requirements</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Resources</h2>
+
+            <div class="button-group">
+                <a href="signature_manifest_github_test.xml" class="btn btn-primary" download>📥 Download Manifest</a>
+                <a href="https://github.com/adityajichakar-lly/signature-addin-assets" class="btn btn-secondary" target="_blank">🔗 View on GitHub</a>
+            </div>
+
+            <div class="note">
+                <strong>Need Help?</strong>
+                <p style="margin-top: 5px;">Contact the development team or check the <a href="https://learn.microsoft.com/office/dev/add-ins/outlook/" target="_blank">Office Add-ins documentation</a>.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #999; font-size: 12px;">
+            <p>Last updated: 2026-04-16</p>
+            <p>For testing purposes only. Not for production use without authorization.</p>
+        </div>
+    </div>
+
+    <script>
+        function copyManifestUrl() {
+            const url = document.getElementById('manifestUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Manifest URL copied to clipboard!');
+            }).catch(() => {
+                alert('Failed to copy. Please copy manually.');
+            });
+        }
+    </script>
+</body>
+</html>

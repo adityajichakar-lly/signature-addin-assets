@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="MailApp">
+  <Id>{C341AD31-BF7A-4C1D-99F1-D2E5896BEB0A}</Id>
+  <Version>1.0</Version>
+  <ProviderName>Eli Lilly and Company</ProviderName>
+  <DefaultLocale>en-us</DefaultLocale>
+  <DisplayName DefaultValue="Lilly Signature Manager"/>
+  <Description DefaultValue="Manage and insert your Lilly email signature."/>
+  <IconUrl DefaultValue="https://19willigd.github.io/Signature-addin-assets/assets/final_logo_86x86.png"/>
+  <HighResolutionIconUrl DefaultValue="https://19willigd.github.io/Signature-addin-assets/assets/final_logo_86x86.png"/>
+  <SupportUrl DefaultValue="https://www.lilly.com"/>
+  <AppDomains>
+    <AppDomain>https://raw.githubusercontent.com</AppDomain>
+    <AppDomain>https://19willigd.github.io</AppDomain>
+    <AppDomain>https://login.microsoftonline.com</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="Mailbox" />
+    </Sets>
+  </Requirements>
+
+  <!-- Old schema. This will be overridden by the VersionOverrides below. -->
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://19willigd.github.io/Signature-addin-assets/editsignature.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteMailbox</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+  </Rule>
+  <DisableEntityHighlighting>true</DisableEntityHighlighting>
+  <!-- /Old schema. -->
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Description resid="residAppDesc" />
+
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.5">
+          <bt:Set Name="Mailbox" />
+        </bt:Sets>
+      </Requirements>
+
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <!-- Specify the runtime for event-based activation. -->
+          <!-- For more information, see https://learn.microsoft.com/office/dev/add-ins/outlook/autolaunch -->
+          <Runtimes>
+            <Runtime resid="Autorun">
+              <Override type="javascript" resid="runtimeJs"/>
+            </Runtime>
+          </Runtimes>
+
+          <DesktopFormFactor>
+            <FunctionFile resid="functionFile"/>
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="mccsG0">
+                  <Label resid="residGL0"/>
+                  <Control xsi:type="Button" id="quickInsertBtn">
+                    <Label resid="residStr3"/>
+                    <Supertip>
+                      <Title resid="residStr3" />
+                      <Description resid="residTT3" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16" />
+                      <bt:Image size="32" resid="Icon32" />
+                      <bt:Image size="80" resid="Icon80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>quickInsertSignature</FunctionName>
+                    </Action>
+                  </Control>
+                  <Control xsi:type="Button" id="editSignatureBtn">
+                    <Label resid="residStr2"/>
+                    <Supertip>
+                      <Title resid="residStr2" />
+                      <Description resid="residTT2" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16" />
+                      <bt:Image size="32" resid="Icon32" />
+                      <bt:Image size="80" resid="Icon80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="residUrl1"/>
+                      <SupportsPinning>true</SupportsPinning>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+
+            <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="aocsG0">
+                  <Label resid="residGL0"/>
+                  <Control xsi:type="Button" id="quickInsertBtnAppt">
+                    <Label resid="residStr3"/>
+                    <Supertip>
+                      <Title resid="residStr3" />
+                      <Description resid="residTT3" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16" />
+                      <bt:Image size="32" resid="Icon32" />
+                      <bt:Image size="80" resid="Icon80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>quickInsertSignature</FunctionName>
+                    </Action>
+                  </Control>
+                  <Control xsi:type="Button" id="editSignatureBtnAppt">
+                    <Label resid="residStr2"/>
+                    <Supertip>
+                      <Title resid="residStr2" />
+                      <Description resid="residTT2" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16" />
+                      <bt:Image size="32" resid="Icon32" />
+                      <bt:Image size="80" resid="Icon80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="residUrl1"/>
+                      <SupportsPinning>true</SupportsPinning>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+
+            <!-- Read mode - Allow users to edit signature while reading emails -->
+            <ExtensionPoint xsi:type="MessageReadCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="mrcsG0">
+                  <Label resid="residGL0"/>
+                  <Control xsi:type="Button" id="MRCS_ReadBtn1">
+                    <Label resid="residStr2"/>
+                    <Supertip>
+                      <Title resid="residStr2"/>
+                      <Description resid="residTT2"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16" />
+                      <bt:Image size="32" resid="Icon32" />
+                      <bt:Image size="80" resid="Icon80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="residUrl1"/>
+                      <SupportsPinning>true</SupportsPinning>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+
+            <!-- Specify function to call for new message and new appointment events -->
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="checkSignature" />
+                <LaunchEvent Type="OnNewAppointmentOrganizer" FunctionName="checkSignature" />
+              </LaunchEvents>
+              <SourceLocation resid="Autorun" />
+            </ExtensionPoint>
+
+          </DesktopFormFactor>
+
+          <!-- Mobile support -->
+          <MobileFormFactor>
+            <!-- FunctionFile required for mobile event-based activation -->
+            <FunctionFile resid="Autorun"/>
+
+            <!-- Event-based activation for mobile compose -->
+            <!-- ONLY OnNewMessageCompose is supported on mobile -->
+            <!-- Auto-inserts signature on new messages -->
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="checkSignature" />
+              </LaunchEvents>
+              <!-- SourceLocation points to the HTML that loads the JS -->
+              <SourceLocation resid="Autorun" />
+            </ExtensionPoint>
+
+            <!-- Read mode on mobile - Allow users to edit signature -->
+            <ExtensionPoint xsi:type="MobileMessageReadCommandSurface">
+              <Group id="mobileMsgRead">
+                <Label resid="residGL0"/>
+                <Control xsi:type="MobileButton" id="MRCS_MobileReadBtn">
+                  <Label resid="residStr2"/>
+                  <Icon xsi:type="bt:MobileIconList">
+                    <bt:Image size="25" scale="1" resid="Icon16"/>
+                    <bt:Image size="25" scale="2" resid="Icon32"/>
+                    <bt:Image size="25" scale="3" resid="Icon80"/>
+                    <bt:Image size="32" scale="1" resid="Icon16"/>
+                    <bt:Image size="32" scale="2" resid="Icon32"/>
+                    <bt:Image size="32" scale="3" resid="Icon80"/>
+                    <bt:Image size="48" scale="1" resid="Icon32"/>
+                    <bt:Image size="48" scale="2" resid="Icon80"/>
+                    <bt:Image size="48" scale="3" resid="Icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="residUrl1"/>
+                  </Action>
+                </Control>
+              </Group>
+            </ExtensionPoint>
+
+          </MobileFormFactor>
+
+        </Host>
+      </Hosts>
+      <Resources>
+        <bt:Images>
+          <bt:Image id="Icon16" DefaultValue="https://19willigd.github.io/Signature-addin-assets/assets/final_logo_86x86.png"/>
+          <bt:Image id="Icon32" DefaultValue="https://19willigd.github.io/Signature-addin-assets/assets/final_logo_86x86.png"/>
+          <bt:Image id="Icon80" DefaultValue="https://19willigd.github.io/Signature-addin-assets/assets/final_logo_86x86.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <!-- TESTING URLS - Using raw.githubusercontent.com (trusted by OWA) -->
+          <!-- adityajichakar-lly/signature-addin-assets -->
+          <bt:Url id="functionFile" DefaultValue="https://raw.githubusercontent.com/adityajichakar-lly/signature-addin-assets/main/quick_insert.html"></bt:Url>
+          <bt:Url id="residUrl1" DefaultValue="https://raw.githubusercontent.com/adityajichakar-lly/signature-addin-assets/main/editsignature.html"></bt:Url>
+          <bt:Url id="Autorun" DefaultValue="https://raw.githubusercontent.com/adityajichakar-lly/signature-addin-assets/main/autorunweb.html"></bt:Url>
+          <bt:Url id="runtimeJs" DefaultValue="https://raw.githubusercontent.com/adityajichakar-lly/signature-addin-assets/main/autorunshared.js"></bt:Url>
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="residGL0" DefaultValue="Lilly Signature Manager"></bt:String>
+          <bt:String id="residStr2" DefaultValue="Edit Signature"></bt:String>
+          <bt:String id="residStr3" DefaultValue="Quick Insert"></bt:String>
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="residAppDesc" DefaultValue="Manage and insert your Lilly email signature."></bt:String>
+          <bt:String id="residTT2" DefaultValue="Edit your signature details and preferences"></bt:String>
+          <bt:String id="residTT3" DefaultValue="Instantly insert your signature into the email"></bt:String>
+        </bt:LongStrings>
+      </Resources>
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
